@@ -6,6 +6,7 @@ package org.yanhuang.springcloud.rest.service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.yanhuang.springcloud.rest.jpa.a.domain.Employee;
+import org.yanhuang.springcloud.rest.jpa.a.repo.EmployeeRepository;
+import org.yanhuang.springcloud.rest.jpa.b.domain.Company;
+import org.yanhuang.springcloud.rest.jpa.b.repo.CompanyRepository;
+import org.yanhuang.springcloud.rest.jpa.domain.Person;
+import org.yanhuang.springcloud.rest.jpa.domain.o.Nation;
+import org.yanhuang.springcloud.rest.jpa.repo.PersonRepository;
+import org.yanhuang.springcloud.rest.jpa.repo.o.NationRepository;
 
 /**
  * @author zhyhang
@@ -34,12 +43,60 @@ public class DbConsoleService {
 	@Qualifier("jdbcTemplateB")
 	private JdbcTemplate jdbcTemplateB;
 
+	@Autowired
+	private PersonRepository personRepo;
+
+	@Autowired
+	private NationRepository nationRepo;
+	
+	@Autowired
+	private EmployeeRepository employeeRepo;
+	
+	@Autowired
+	private CompanyRepository companyRepo;
+
 	public List<Map<String, Object>> queryAllPerson() {
 		try {
 			return jdbcTemplate.queryForList("select * from person");
 		} catch (Exception e) {
 			logger.error("queryAllPerson error:", e);
 			return Collections.emptyList();
+		}
+	}
+
+	public Optional<Person> queryPerson(Long id) {
+		try {
+			return personRepo.findById(id);
+		} catch (Exception e) {
+			logger.error("queryPerson[{}] error:", id, e);
+			return Optional.empty();
+		}
+	}
+
+	public Optional<Nation> queryNation(Long id) {
+		try {
+			return nationRepo.findById(id);
+		} catch (Exception e) {
+			logger.error("queryNation[{}] error:", id, e);
+			return Optional.empty();
+		}
+	}
+	
+	public Optional<Employee> queryEmployee(Long id) {
+		try {
+			return employeeRepo.findById(id);
+		} catch (Exception e) {
+			logger.error("queryEmployee[{}] error:", id, e);
+			return Optional.empty();
+		}
+	}
+	
+	public Optional<Company> queryCompany(Long id) {
+		try {
+			return companyRepo.findById(id);
+		} catch (Exception e) {
+			logger.error("queryCompany[{}] error:", id, e);
+			return Optional.empty();
 		}
 	}
 

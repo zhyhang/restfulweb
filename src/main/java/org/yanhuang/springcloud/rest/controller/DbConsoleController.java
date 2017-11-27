@@ -5,36 +5,68 @@ package org.yanhuang.springcloud.rest.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.yanhuang.springcloud.rest.jpa.a.domain.Employee;
+import org.yanhuang.springcloud.rest.jpa.b.domain.Company;
+import org.yanhuang.springcloud.rest.jpa.domain.Person;
+import org.yanhuang.springcloud.rest.jpa.domain.o.Nation;
 import org.yanhuang.springcloud.rest.service.DbConsoleService;
 
 /**
- * database console 
+ * database console
+ * 
  * @author zhyhang
  *
  */
 @RestController
 public class DbConsoleController {
-	
+
 	@Autowired
 	private DbConsoleService service;
-	
+
 	@GetMapping("/allperson")
 	public List<Map<String, Object>> queryAllPerson() {
-		return service.queryAllPerson();
+		List<Map<String, Object>> allPerson = service.queryAllPerson();
+		return allPerson;
 	}
 
-	@GetMapping("/uvgroup")
+	@GetMapping("/person/{id}/")
+	public Person queryPerson(@PathVariable("id") Long id) {
+		Optional<Person> queryPerson = service.queryPerson(id);
+		return queryPerson.orElse(null);
+	}
+
+	@GetMapping("/nation/{id}/")
+	public Nation queryNation(@PathVariable("id") Long id) {
+		Optional<Nation> queryNation = service.queryNation(id);
+		return queryNation.orElse(null);
+	}
+	
+	@GetMapping("/a/employee/{id}/")
+	public Employee queryEmployee(@PathVariable("id") Long id) {
+		Optional<Employee> queryEmployee = service.queryEmployee(id);
+		return queryEmployee.orElse(null);
+	}
+	
+	@GetMapping("/b/company/{id}/")
+	public Company queryCompany(@PathVariable("id") Long id) {
+		Optional<Company> queryCompany = service.queryCompany(id);
+		return queryCompany.orElse(null);
+	}	
+
+	@GetMapping("/a/uvgroup")
 	public List<Map<String, Object>> queryUvGroup() {
 		return service.queryUvGroup();
 	}
-	
-	@GetMapping("/geo")
-	public List<Map<String,Object>> queryGeo() {
+
+	@GetMapping("/b/geo")
+	public List<Map<String, Object>> queryGeo() {
 		return service.queryGeo();
 	}
-	
+
 }

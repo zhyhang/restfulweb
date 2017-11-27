@@ -27,12 +27,12 @@ public class JdbcTemplateConfiger {
 	}
 
 	@Bean(name = "jdbcTemplateA")
-	public JdbcTemplate jdbcTemplateA(@Qualifier("mariadbDsA") DataSource dataSource) {
+	public JdbcTemplate jdbcTemplateA(@Qualifier("datasourceA") DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
 	}
 
 	@Bean(name = "jdbcTemplateB")
-	public JdbcTemplate jdbcTemplateB(@Qualifier("mariadbDsB") DataSource dataSource) {
+	public JdbcTemplate jdbcTemplateB(@Qualifier("datasourceB") DataSource dataSource) {
 		return new JdbcTemplate(dataSource);
 	}
 

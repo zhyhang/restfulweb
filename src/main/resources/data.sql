@@ -1,1 +1,4 @@
-insert into person(name,birthday) values('z','1988-12-20'),('l','1990-07-26'),('z','2016-02-21');
+insert into person(name,birthday,creation) values('z','1988-12-20',now()),('l','1990-07-26',now()),('z','2016-02-21',now());
+insert into employee(name,birthday,creation) values('yu','1988-12-20',now()),('yan','1990-07-26',now()),('ran','2019-02-21',now());
+insert into nation(name,code,quantity,found_date,minor,creation) values('汉族','han',1000000000,'0001-01-01',false,now()),('满族','man',150000000,'0088-02-28',true,now()),('壮族','zhuang',80000000,'1002-03-15',true,now());
+insert into company(name,code,income,found_date,minor,creation) values('品友','ipinyou',1000000000.00,'1998-01-01',false,now()),('别样','beyond',150000000.00,'2015-02-28',true,now()),('中国移动','China mobile',500000000000.00,'1995-03-15',true,now());
