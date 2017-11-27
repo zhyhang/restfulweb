@@ -74,7 +74,7 @@ public class DbConsoleController {
 		service.updatePerson();
 	}
 	
-	@GetMapping("/b/updatepersonexception/")
+	@GetMapping("/updatepersonexception/")
 	public void updatePersonException() {
 		service.updatePersonException();
 	}
