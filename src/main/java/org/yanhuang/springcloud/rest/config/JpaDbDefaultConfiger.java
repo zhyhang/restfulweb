@@ -25,8 +25,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        entityManagerFactoryRef="entityManagerFactoryDefault",
-        transactionManagerRef="transactionManagerDefault",
+        entityManagerFactoryRef="entityManagerFactory",
+        transactionManagerRef="transactionManager",
         basePackages= { "org.yanhuang.springcloud.rest.jpa.repo" }) //package of repository
 public class JpaDbDefaultConfiger {
 	
@@ -34,13 +34,13 @@ public class JpaDbDefaultConfiger {
     private DataSource datasource;
     
     @Primary
-    @Bean(name = "entityManagerDefault")
+    @Bean(name = "entityManager")
     public EntityManager entityManager(EntityManagerFactoryBuilder builder) {
         return entityManagerFactoryPrimary(builder).getObject().createEntityManager();
     }
 
     @Primary
-    @Bean(name = "entityManagerFactoryDefault")
+    @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryPrimary (EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(datasource)
@@ -50,7 +50,7 @@ public class JpaDbDefaultConfiger {
     }
 
     @Primary
-    @Bean(name = "transactionManagerDefault")
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactoryPrimary(builder).getObject());
     }

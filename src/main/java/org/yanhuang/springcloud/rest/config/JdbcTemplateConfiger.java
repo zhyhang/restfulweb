@@ -13,7 +13,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- * multi datasource jdbc config
+ * multi datasource jdbc config</br>
+ * <b>When using transaction manager, refer JpaDbAConfiger and JpaDbBConfiger </b>
  * @author zhyhang
  *
  */

@@ -68,5 +68,25 @@ public class DbConsoleController {
 	public List<Map<String, Object>> queryGeo() {
 		return service.queryGeo();
 	}
+	
+	@GetMapping("/updateperson/")
+	public void updatePerson() {
+		service.updatePerson();
+	}
+	
+	@GetMapping("/b/updatepersonexception/")
+	public void updatePersonException() {
+		service.updatePersonException();
+	}
+	
+	@GetMapping("/b/updatecompany/")
+	public void updateCompany() {
+		service.updateCompany();
+	}
+	
+	@GetMapping("/b/updatecompanyexception/")
+	public void updateCompanyException() {
+		service.updateCompanyException();
+	}
 
 }

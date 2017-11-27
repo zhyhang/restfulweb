@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.yanhuang.springcloud.rest.jpa.a.domain.Employee;
 import org.yanhuang.springcloud.rest.jpa.a.repo.EmployeeRepository;
 import org.yanhuang.springcloud.rest.jpa.b.domain.Company;
@@ -116,5 +117,25 @@ public class DbConsoleService {
 			logger.error("queryGeo error:", e);
 			return Collections.emptyList();
 		}
+	}
+	
+	public void updateCompany() {
+		jdbcTemplateB.update("update company set last_modified=now() where id=1");
+	}
+
+	@Transactional(transactionManager="transactionManagerB")
+	public void updateCompanyException() {
+		jdbcTemplateB.update("update company set last_modified='2017-12-12 12:12:12' where id=1");
+		throw new RuntimeException("update company exception");
+	}
+	
+	public void updatePerson() {
+		jdbcTemplate.update("update person set last_modified=now() where id=1");
+	}
+
+	@Transactional()
+	public void updatePersonException() {
+		jdbcTemplate.update("update person set last_modified='2017-12-12 12:12:12' where id=1");
+		throw new RuntimeException("update person exception");
 	}
 }
