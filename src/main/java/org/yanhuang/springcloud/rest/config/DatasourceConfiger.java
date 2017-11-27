@@ -37,25 +37,25 @@ public class DatasourceConfiger {
     }
 	
 	@Bean("datasourceAProp")
-	@ConfigurationProperties(prefix="spring.datasource.mariadb.a")
+	@ConfigurationProperties(prefix="spring.datasource.a")
 	public DataSourceProperties mariadbDsAProp() {
 	    return new DataSourceProperties();
 	}
 
 	@Bean(name = "datasourceA")
-	@ConfigurationProperties(prefix="spring.datasource.mariadb.a")
+	@ConfigurationProperties(prefix="spring.datasource.a")
     public DataSource mariadbDsA() {
         return mariadbDsAProp().initializeDataSourceBuilder().build();
     }
 	
 	@Bean("datasourceBProp")
-	@ConfigurationProperties(prefix="spring.datasource.mariadb.b")
+	@ConfigurationProperties(prefix="spring.datasource.b")
 	public DataSourceProperties mariadbDsBProp() {
 	    return new DataSourceProperties();
 	}
 
     @Bean(name = "datasourceB")
-    @ConfigurationProperties(prefix="spring.datasource.mariadb.b")
+    @ConfigurationProperties(prefix="spring.datasource.b")
     public DataSource mariadbDsB() {
         return mariadbDsBProp().initializeDataSourceBuilder().build();
     }
