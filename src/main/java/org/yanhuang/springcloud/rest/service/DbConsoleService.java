@@ -49,10 +49,10 @@ public class DbConsoleService {
 
 	@Autowired
 	private NationRepository nationRepo;
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepo;
-	
+
 	@Autowired
 	private CompanyRepository companyRepo;
 
@@ -82,7 +82,7 @@ public class DbConsoleService {
 			return Optional.empty();
 		}
 	}
-	
+
 	public Optional<Employee> queryEmployee(Long id) {
 		try {
 			return employeeRepo.findById(id);
@@ -91,7 +91,7 @@ public class DbConsoleService {
 			return Optional.empty();
 		}
 	}
-	
+
 	public Optional<Company> queryCompany(Long id) {
 		try {
 			return companyRepo.findById(id);
@@ -118,24 +118,29 @@ public class DbConsoleService {
 			return Collections.emptyList();
 		}
 	}
-	
+
 	public void updateCompany() {
 		jdbcTemplateB.update("update company set last_modified=now() where id=1");
 	}
 
-	@Transactional(transactionManager="transactionManagerB")
+	@Transactional(transactionManager = "transactionManagerB")
 	public void updateCompanyException() {
 		jdbcTemplateB.update("update company set last_modified='2017-12-12 12:12:12' where id=1");
 		throw new RuntimeException("update company exception");
 	}
-	
+
 	public void updatePerson() {
 		jdbcTemplate.update("update person set last_modified=now() where id=1");
 	}
 
-	@Transactional()
+	@Transactional
 	public void updatePersonException() {
 		jdbcTemplate.update("update person set last_modified='2017-12-12 12:12:12' where id=1");
 		throw new RuntimeException("update person exception");
+	}
+
+	@Transactional
+	public Person createPerson(Person person) {
+			return personRepo.save(person);
 	}
 }
