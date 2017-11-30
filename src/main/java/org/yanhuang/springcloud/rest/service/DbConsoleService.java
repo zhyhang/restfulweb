@@ -145,7 +145,7 @@ public class DbConsoleService {
 	}
 	
 	@Transactional
-	public void updatePerson(Person person) {
-			personRepo.save(person);
+	public Person updatePerson(Person person) {
+			return personRepo.save(person);
 	}
 }

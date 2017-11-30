@@ -4,7 +4,9 @@ name varchar(128),
 birthday date,
 creation datetime not null default now(),
 last_modified datetime not null default now(),
-version int not null default 0
+version int not null default 0,
+active bool default true,
+removed bool default false
 ) charset=utf8;
 
 create table employee(
@@ -13,7 +15,9 @@ name varchar(128),
 birthday date,
 creation datetime not null default now(),
 last_modified datetime not null  default now(),
-version int not null default 0
+version int not null default 0,
+active bool default true,
+removed bool default false
 ) charset=utf8;
 
 create table nation(
@@ -25,7 +29,9 @@ found_date date,
 minor boolean,
 creation datetime not null default now(),
 last_modified datetime not null default now(),
-version int not null default 0
+version int not null default 0,
+active bool default true,
+removed bool default false
 ) charset=utf8;
 
 create table company(
@@ -37,6 +43,8 @@ found_date date,
 minor boolean,
 creation datetime not null default now(),
 last_modified datetime not null default now(),
-version int not null default 0
+version int not null default 0,
+active bool default true,
+removed bool default false
 ) charset=utf8;
 

@@ -11,8 +11,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -52,18 +54,18 @@ public class DbConsoleController {
 		Optional<Nation> queryNation = service.queryNation(id);
 		return queryNation.orElse(null);
 	}
-	
+
 	@GetMapping("/a/employee/{id}/")
 	public Employee queryEmployee(@PathVariable("id") Long id) {
 		Optional<Employee> queryEmployee = service.queryEmployee(id);
 		return queryEmployee.orElse(null);
 	}
-	
+
 	@GetMapping("/b/company/{id}/")
 	public Company queryCompany(@PathVariable("id") Long id) {
 		Optional<Company> queryCompany = service.queryCompany(id);
 		return queryCompany.orElse(null);
-	}	
+	}
 
 	@GetMapping("/a/uvgroup")
 	public List<Map<String, Object>> queryUvGroup() {
@@ -74,22 +76,22 @@ public class DbConsoleController {
 	public List<Map<String, Object>> queryGeo() {
 		return service.queryGeo();
 	}
-	
+
 	@GetMapping("/updateperson/")
 	public void updatePerson() {
 		service.updatePerson();
 	}
-	
+
 	@GetMapping("/updatepersonexception/")
 	public void updatePersonException() {
 		service.updatePersonException();
 	}
-	
+
 	@GetMapping("/b/updatecompany/")
 	public void updateCompany() {
 		service.updateCompany();
 	}
-	
+
 	@GetMapping("/b/updatecompanyexception/")
 	public void updateCompanyException() {
 		service.updateCompanyException();
@@ -98,10 +100,20 @@ public class DbConsoleController {
 	@PostMapping("/person/")
 	public ResponseEntity<?> createPerson(@RequestBody Person person) {
 		Person created = service.createPerson(person);
-		URI location = ServletUriComponentsBuilder
-				.fromCurrentRequest().path("/{id}/")
-				.buildAndExpand(created.getId()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}/").buildAndExpand(created.getId())
+				.toUri();
 		return ResponseEntity.created(location).build();
 	}
-	
+
+	@PutMapping("/person/{id}/")
+	@PatchMapping("/person/{id}/")
+	public ResponseEntity<?> updatePerson(@RequestBody Person person, @PathVariable Long id) {
+		service.queryPerson(id).ifPresent(old -> {
+			old.setBirthDay(person.getBirthDay());
+			old.setName(person.getName());
+			service.updatePerson(old);
+		});
+		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().build().toUri();
+		return ResponseEntity.created(location).build();
+	}
 }
