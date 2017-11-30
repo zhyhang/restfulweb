@@ -19,6 +19,8 @@ import org.yanhuang.springcloud.rest.entity.BaseEntity;
 @Table(name = "nation")
 public class Nation extends BaseEntity{
 
+	private static final long serialVersionUID = 5077746554014158258L;
+
 	@Column(name = "name")
 	private String name;
 	
