@@ -4,16 +4,12 @@
 package org.yanhuang.springcloud.rest.jpa.domain.o;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.yanhuang.springcloud.rest.entity.BaseEntity;
 
 /**
  * @author zhyhang
@@ -21,12 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @Entity
 @Table(name = "nation")
-public class Nation {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+public class Nation extends BaseEntity{
 
 	@Column(name = "name")
 	private String name;
@@ -43,22 +34,6 @@ public class Nation {
 	@Column(name = "minor")
 	private Boolean minor;
 	
-	@Column(name = "creation")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime creation;
-
-	@Column(name = "last_modified")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime lastModified;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -97,22 +72,6 @@ public class Nation {
 
 	public void setMinor(Boolean minor) {
 		this.minor = minor;
-	}
-
-	public LocalDateTime getCreation() {
-		return creation;
-	}
-
-	public void setCreation(LocalDateTime creation) {
-		this.creation = creation;
-	}
-
-	public LocalDateTime getLastModified() {
-		return lastModified;
-	}
-
-	public void setLastModified(LocalDateTime lastModified) {
-		this.lastModified = lastModified;
 	}
 	
 }
