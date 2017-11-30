@@ -2,16 +2,18 @@ create table person(
 id int auto_increment primary key,
 name varchar(128),
 birthday date,
-creation datetime not null,
-last_modified datetime default now()
+creation datetime not null default now(),
+last_modified datetime not null default now(),
+version int not null default 0
 ) charset=utf8;
 
 create table employee(
 id int auto_increment primary key,
 name varchar(128),
 birthday date,
-creation datetime not null,
-last_modified datetime default now()
+creation datetime not null default now(),
+last_modified datetime not null  default now(),
+version int not null default 0
 ) charset=utf8;
 
 create table nation(
@@ -21,8 +23,9 @@ code varchar(128),
 quantity int,
 found_date date,
 minor boolean,
-creation datetime not null,
-last_modified datetime default now()
+creation datetime not null default now(),
+last_modified datetime not null default now(),
+version int not null default 0
 ) charset=utf8;
 
 create table company(
@@ -32,7 +35,8 @@ code varchar(128),
 income decimal(20,6),
 found_date date,
 minor boolean,
-creation datetime not null,
-last_modified datetime default now()
+creation datetime not null default now(),
+last_modified datetime not null default now(),
+version int not null default 0
 ) charset=utf8;
 

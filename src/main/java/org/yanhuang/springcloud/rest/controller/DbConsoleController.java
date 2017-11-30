@@ -43,7 +43,8 @@ public class DbConsoleController {
 	@GetMapping("/person/{id}/")
 	public Person queryPerson(@PathVariable("id") Long id) {
 		Optional<Person> queryPerson = service.queryPerson(id);
-		return queryPerson.orElse(null);
+		Person p = queryPerson.orElse(null);
+		return p;
 	}
 
 	@GetMapping("/nation/{id}/")
