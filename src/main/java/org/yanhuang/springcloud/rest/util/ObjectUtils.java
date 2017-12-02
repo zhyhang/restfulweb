@@ -4,11 +4,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.PropertyAccessorFactory;
 
 public class ObjectUtils {
-	
+
 	/**
 	 * wrapper Exception to RuntimeException
 	 * 
@@ -102,7 +107,7 @@ public class ObjectUtils {
 		}
 		throw new IllegalArgumentException("No enum constant " + name);
 	}
-	
+
 	public static <P> P getField(Object o, Class<P> type, String propertyName) {
 		return getField(o.getClass(), propertyName, type, o);
 	}
@@ -147,4 +152,37 @@ public class ObjectUtils {
 			throw runtimeException(e);
 		}
 	}
+	
+	/**
+	 * copy properties from src bean to target bean
+	 * @param src
+	 * @param trg
+	 */
+	public static void copyProperties(Object src, Object trg) {
+		copyPropertiesBl(src, trg, Collections.emptyList());
+	}
+
+	/**
+	 * copy specified properites (white list) from src bean to target bean
+	 * 
+	 * @param src
+	 * @param trg
+	 * @param whiteList
+	 */
+	public static void copyPropertiesWl(Object src, Object trg, Collection<String> whiteList) {
+		BeanWrapper srcWrap = PropertyAccessorFactory.forBeanPropertyAccess(src);
+		BeanWrapper trgWrap = PropertyAccessorFactory.forBeanPropertyAccess(trg);
+		whiteList.forEach(p -> trgWrap.setPropertyValue(p, srcWrap.getPropertyValue(p)));
+	}
+	
+	/**
+	 * copy properties from src bean to target bean except specify black list
+	 * @param src
+	 * @param trg
+	 * @param blackList
+	 */
+	public static void copyPropertiesBl(Object src, Object trg, Collection<String> blackList) {
+		BeanUtils.copyProperties(src, trg, blackList.toArray(new String[blackList.size()]));
+	}
+
 }

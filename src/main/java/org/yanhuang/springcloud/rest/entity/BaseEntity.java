@@ -33,13 +33,14 @@ public abstract class BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(updatable=false)
 	private Long id;
-
+	
 	@Version
 	@Column(name = "version")
 	private long version = -1;
 
-	@Column(name = "creation")
+	@Column(name = "creation",updatable=false)
 	@CreatedDate
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime creation;
@@ -54,7 +55,9 @@ public abstract class BaseEntity implements Serializable {
 	
 	@Column(name="removed")
 	private boolean removed = false;
-	
+
+	// TODO creator
+	// TODO abac property(e.g. parentid)
 	@Override
 	public int hashCode() {
 		if(getId()!=null) {
