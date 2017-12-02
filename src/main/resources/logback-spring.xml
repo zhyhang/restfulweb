@@ -6,7 +6,7 @@
 	<property name="LOG_HOME_ING" value="/data/logs/ing" />
 	<property name="DEFAULT_LOG_FILE" value="restfulweb.log" />
 
-	<!-- default file log appender -->
+	<!-- appender: default file appender -->
 	<appender name="default.file.log"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<append>true</append>
@@ -27,5 +27,21 @@
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="default.file.log" />
 	</root>
+
+	<!-- logger: jdbc -->
+	<logger name="org.springframework.jdbc" level="DEBUG"	 additivity="false">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="default.file.log" />
+	</logger>
+	
+	<!-- logger: jdbc hibernate -->
+	<logger name="org.hibernate.SQL" level="DEBUG"	 additivity="false">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="default.file.log" />
+	</logger>
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"	 additivity="false">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="default.file.log" />
+	</logger>
 
 </configuration>
