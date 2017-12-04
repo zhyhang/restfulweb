@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +21,7 @@ import org.yanhuang.springcloud.rest.entity.BaseEntity;
  * @author zhyhang
  *
  */
+@Entity
 @Table(name = "security_user")
 public class User extends BaseEntity implements UserDetails {
 
