@@ -8,8 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +27,7 @@ import org.yanhuang.springcloud.rest.jpa.b.domain.Company;
 import org.yanhuang.springcloud.rest.jpa.domain.Person;
 import org.yanhuang.springcloud.rest.jpa.domain.o.Nation;
 import org.yanhuang.springcloud.rest.service.DbConsoleService;
+import org.yanhuang.springcloud.rest.util.JsonUtils;
 
 /**
  * database console
@@ -33,11 +38,14 @@ import org.yanhuang.springcloud.rest.service.DbConsoleService;
 @RestController
 public class DbConsoleController {
 
+	private static final Logger logger = LoggerFactory.getLogger(DbConsoleController.class);
+
 	@Autowired
 	private DbConsoleService service;
 
 	@GetMapping("/allperson")
-	public List<Map<String, Object>> queryAllPerson() {
+	public List<Map<String, Object>> queryAllPerson(@AuthenticationPrincipal User user) {
+		logger.info("spring-security-user: {}",JsonUtils.toJson(user));
 		List<Map<String, Object>> allPerson = service.queryAllPerson();
 		return allPerson;
 	}
@@ -116,4 +124,5 @@ public class DbConsoleController {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().build().toUri();
 		return ResponseEntity.created(location).build();
 	}
+	
 }

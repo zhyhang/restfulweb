@@ -1,12 +1,21 @@
 package org.yanhuang.springcloud.rest.config;
 
-import org.springframework.boot.autoconfigure.security.StaticResourceRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
@@ -19,14 +28,13 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		/* @formatter:off */
 
 		// production
-		/*
-		http.authorizeRequests()
-		.requestMatchers(StaticResourceRequest.toCommonLocations()).permitAll()
-		.anyRequest().fullyAuthenticated()
-		.and().formLogin()
-		.loginPage("/login").permitAll()
-		.and().logout().permitAll();
-		*/
+
+//		http.authorizeRequests()
+//		.requestMatchers(StaticResourceRequest.toCommonLocations()).permitAll()
+//		.anyRequest().fullyAuthenticated()
+//		.and().formLogin()
+//		.loginPage("/login").permitAll()
+//		.and().logout().permitAll();
 		
 		// h2-console can run nornally
 		/**
@@ -38,7 +46,7 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		 */
 		
 		http.authorizeRequests()
-		.antMatchers("/").permitAll()
+		.antMatchers("/**").permitAll()
 		.and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
 		.and().headers().frameOptions().disable()
 		.and().csrf().disable();
@@ -53,6 +61,23 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		return new InMemoryUserDetailsManager(
 				User.withDefaultPasswordEncoder().username("admin").password("88888888").roles("ADMIN", "USER").build(),
 				User.withDefaultPasswordEncoder().username("user").password("666666").roles("USER").build());
+	}
+
+	/**
+	 * Compatible history and future
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		String idForEncode = "bcrypt";
+		Map<String, PasswordEncoder> encoders = new HashMap<>();
+		encoders.put(idForEncode, new BCryptPasswordEncoder(8));
+		encoders.put("noop", NoOpPasswordEncoder.getInstance());
+		encoders.put("pbkdf2", new Pbkdf2PasswordEncoder());
+		encoders.put("scrypt", new SCryptPasswordEncoder());
+		encoders.put("sha256", new StandardPasswordEncoder());
+		return new DelegatingPasswordEncoder(idForEncode, encoders);
 	}
 
 }

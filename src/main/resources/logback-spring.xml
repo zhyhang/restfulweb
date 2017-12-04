@@ -43,5 +43,11 @@
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="default.file.log" />
 	</logger>
+	
+	<!-- logger: jdbc datasource connect pool hikari -->
+	<logger name="com.zaxxer.hikari" level="DEBUG"	 additivity="false">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="default.file.log" />
+	</logger>	
 
 </configuration>
