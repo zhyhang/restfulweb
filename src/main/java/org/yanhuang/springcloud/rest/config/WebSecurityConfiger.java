@@ -26,12 +26,12 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 
 		// production
 
-//		http.authorizeRequests()
-//		.requestMatchers(StaticResourceRequest.toCommonLocations()).permitAll()
-//		.anyRequest().fullyAuthenticated()
-//		.and().formLogin()
-//		.loginPage("/login").permitAll()
-//		.and().logout().permitAll();
+		http.authorizeRequests()
+		.requestMatchers(StaticResourceRequest.toCommonLocations()).permitAll()
+		.anyRequest().fullyAuthenticated()
+		.and().formLogin()
+		.loginPage("/login").permitAll()
+		.and().logout().permitAll();
 		
 		// h2-console can run nornally
 		/**
@@ -42,11 +42,11 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		 * </br>https://stackoverflow.com/questions/7309359/view-content-of-h2-or-hsqldb-in-memory-database
 		 */
 		
-		http.authorizeRequests()
-		.antMatchers("/**").permitAll()
-		.and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
-		.and().headers().frameOptions().disable()
-		.and().csrf().disable();
+//		http.authorizeRequests()
+//		.antMatchers("/**").permitAll()
+//		.and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
+//		.and().headers().frameOptions().disable()
+//		.and().csrf().disable();
 		
 		
 		/* @formatter:on */

@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.yanhuang.springcloud.rest.entity.BaseEntity;
 
 /**
@@ -58,13 +59,13 @@ public class User extends BaseEntity implements UserDetails {
 	private String phone;
 
 	@Column(name = "locked")
-	private boolean locked;
+	private boolean locked = false;
 
 	@Column(name = "expired")
-	private boolean expired;
+	private boolean expired = false;
 
 	@Column(name = "pass_expired")
-	private boolean passExpired;
+	private boolean passExpired = false;
 
 	@Override
 	public String getUsername() {
@@ -165,4 +166,7 @@ public class User extends BaseEntity implements UserDetails {
 		this.passExpired = passExpired;
 	}
 
+	public static void main(String[] args) {
+		System.out.println(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("88888888"));
+	}
 }
