@@ -10,7 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -36,7 +36,7 @@ public class User extends BaseEntity implements UserDetails {
 	private String username;
 
 	@Column(name = "password")
-	@NotEmpty
+	@NotBlank
 	private String password;
 
 	/**

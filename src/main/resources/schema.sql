@@ -1,3 +1,4 @@
+-- security
 create table security_user(
 id int auto_increment primary key,
 username varchar(128) not null,
@@ -16,6 +17,8 @@ active bool default true,
 removed bool default false
 ) charset=utf8;
 
+
+-- test
 create table person(
 id int auto_increment primary key,
 name varchar(128),
