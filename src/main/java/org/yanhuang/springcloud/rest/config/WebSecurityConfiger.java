@@ -38,6 +38,7 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		.and().headers().frameOptions().disable() // (all frame nest) for h2-console
 		.and().csrf().disable(); // for h2-console
 		
+//		http.sessionManagement();
 		/**
 		 * https://springframework.guru/using-the-h2-database-console-in-spring-boot-with-spring-security/
 		 * <br>http://127.0.0.1:8080/h2-console/
