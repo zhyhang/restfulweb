@@ -5,6 +5,8 @@ restful web example with spring cloud
  * i18n
  * validation
  * relation between entity 1 and entity 2
+ * login success or failure, write to log and db
+ * loginClient enum supports
  
 
 	

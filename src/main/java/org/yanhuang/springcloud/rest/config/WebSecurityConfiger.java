@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.yanhuang.springcloud.rest.service.security.UserService;
+import org.yanhuang.springcloud.rest.sys.security.LoginSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -18,6 +19,9 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private LoginSuccessHandler loginSuccessHandler;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -31,7 +35,9 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		.anyRequest().fullyAuthenticated()
 		.and().formLogin()
 		.loginPage("/login").permitAll()
+		.successHandler(loginSuccessHandler)
 		.and().logout().permitAll()
+		.and().headers().frameOptions().disable()
 		.and().csrf().disable();
 		
 		// h2-console can run nornally

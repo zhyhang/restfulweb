@@ -9,6 +9,7 @@ import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -66,6 +67,9 @@ public class User extends BaseEntity implements UserDetails {
 
 	@Column(name = "pass_expired")
 	private boolean passExpired = false;
+	
+	@Transient
+	private LoginClient loginClient;
 
 	@Override
 	public String getUsername() {
@@ -164,6 +168,14 @@ public class User extends BaseEntity implements UserDetails {
 
 	public void setPassExpired(boolean passExpired) {
 		this.passExpired = passExpired;
+	}
+
+	public LoginClient getLoginClient() {
+		return loginClient;
+	}
+
+	public void setLoginClient(LoginClient loginClient) {
+		this.loginClient = loginClient;
 	}
 
 	public static void main(String[] args) {
