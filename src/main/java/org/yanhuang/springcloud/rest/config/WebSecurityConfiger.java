@@ -28,8 +28,6 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 
 		/* @formatter:off */
 
-		// production
-
 		http.authorizeRequests()
 		.requestMatchers(StaticResourceRequest.toCommonLocations()).permitAll()
 		.anyRequest().fullyAuthenticated()
@@ -37,10 +35,9 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		.loginPage("/login").permitAll()
 		.successHandler(loginSuccessHandler)
 		.and().logout().permitAll()
-		.and().headers().frameOptions().disable()
-		.and().csrf().disable();
+		.and().headers().frameOptions().disable() // (all frame nest) for h2-console
+		.and().csrf().disable(); // for h2-console
 		
-		// h2-console can run nornally
 		/**
 		 * https://springframework.guru/using-the-h2-database-console-in-spring-boot-with-spring-security/
 		 * <br>http://127.0.0.1:8080/h2-console/
@@ -48,14 +45,7 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		 * </br>jdbc:h2:mem:testdb
 		 * </br>https://stackoverflow.com/questions/7309359/view-content-of-h2-or-hsqldb-in-memory-database
 		 */
-		
-//		http.authorizeRequests()
-//		.antMatchers("/**").permitAll()
-//		.and().authorizeRequests().antMatchers("/h2-console/**").permitAll()
-//		.and().headers().frameOptions().disable()
-//		.and().csrf().disable();
-		
-		
+
 		/* @formatter:on */
 
 	}
