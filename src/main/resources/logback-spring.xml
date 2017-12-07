@@ -45,9 +45,15 @@
 	</logger>
 	
 	<!-- logger: jdbc datasource connect pool hikari -->
-	<logger name="com.zaxxer.hikari" level="DEBUG"	 additivity="false">
+	<logger name="com.zaxxer.hikari" level="INFO"	 additivity="false">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="default.file.log" />
-	</logger>	
+	</logger>
+	
+	<!-- logger: security-authentication -->
+	<logger name="org.springframework.security.authentication.event.LoggerListener" level="WARN"	 additivity="false">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="default.file.log" />
+	</logger>
 
 </configuration>

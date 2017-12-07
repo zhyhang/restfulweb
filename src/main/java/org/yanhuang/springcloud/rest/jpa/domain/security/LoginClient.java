@@ -24,7 +24,9 @@ public class LoginClient extends BaseEntity {
 	private static final long serialVersionUID = 5195716771466450402L;
 	
 	public static enum loginType{
-		login,
+		login_form,
+		login_oauth2,
+		login_openid,
 		logout;
 	}
 

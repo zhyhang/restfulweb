@@ -1,4 +1,4 @@
-package org.yanhuang.springcloud.rest.config;
+package org.yanhuang.springcloud.rest.sys.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.StaticResourceRequest;
@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.yanhuang.springcloud.rest.service.security.UserService;
-import org.yanhuang.springcloud.rest.sys.security.LoginSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,7 +20,10 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 	private UserService userService;
 	
 	@Autowired
-	private LoginSuccessHandler loginSuccessHandler;
+	private FormLoginSuccessHandler loginSuccessHandlerForm;
+	
+	@Autowired
+	private LogoutHandler logoutSuccessHandler;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -33,8 +35,9 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		.anyRequest().fullyAuthenticated()
 		.and().formLogin()
 		.loginPage("/login").permitAll()
-		.successHandler(loginSuccessHandler)
+		.successHandler(loginSuccessHandlerForm)
 		.and().logout().permitAll()
+		.logoutSuccessHandler(logoutSuccessHandler)
 		.and().headers().frameOptions().disable() // (all frame nest) for h2-console
 		.and().csrf().disable(); // for h2-console
 		
@@ -49,6 +52,24 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 
 		/* @formatter:on */
 
+	}
+	
+	/**
+	 * Listening authentication event and log
+	 * @return
+	 */
+	@Bean
+	public org.springframework.security.authentication.event.LoggerListener authenEventListener() {
+		return new org.springframework.security.authentication.event.LoggerListener();
+	}
+	
+	/**
+	 * Listening authorization event and log
+	 * @return
+	 */
+	@Bean
+	public org.springframework.security.access.event.LoggerListener authorEventListener(){
+		return new org.springframework.security.access.event.LoggerListener();
 	}
 
 	@Bean
