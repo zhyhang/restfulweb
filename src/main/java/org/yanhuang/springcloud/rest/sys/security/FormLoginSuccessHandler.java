@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.yanhuang.springcloud.rest.jpa.domain.security.LoginClient;
 import org.yanhuang.springcloud.rest.jpa.domain.security.LoginClient.loginType;
@@ -35,8 +36,8 @@ public class FormLoginSuccessHandler extends LoginSuccessHandler {
 		}
 
 		@Override
-		protected void fillLoginClient(User user, HttpServletRequest request, HttpServletResponse response, LoginClient client) {
-
+		protected void fillLoginClient(User user, HttpServletRequest request, HttpServletResponse response,
+				LoginClient client, Authentication authentication) {
 		}
 
 	}

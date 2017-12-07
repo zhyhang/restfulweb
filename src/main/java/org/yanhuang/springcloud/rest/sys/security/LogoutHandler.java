@@ -3,18 +3,16 @@
  */
 package org.yanhuang.springcloud.rest.sys.security;
 
-import java.io.IOException;
+import java.util.Optional;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.yanhuang.springcloud.rest.jpa.domain.security.LoginClient.loginType;
 import org.yanhuang.springcloud.rest.jpa.domain.security.LoginClient;
+import org.yanhuang.springcloud.rest.jpa.domain.security.LoginClient.loginType;
 import org.yanhuang.springcloud.rest.jpa.domain.security.User;
 
 /**
@@ -22,20 +20,18 @@ import org.yanhuang.springcloud.rest.jpa.domain.security.User;
  *
  */
 @Component
-public class LogoutHandler extends SimpleUrlLogoutSuccessHandler {
+public class LogoutHandler implements org.springframework.security.web.authentication.logout.LogoutHandler{
 
 	@Autowired
 	private LoginClientHanlderForm loginClientHanlder;
 
 	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
-		if (authentication != null && authentication.getPrincipal() != null
-				&& authentication.getPrincipal() instanceof User) {
-			User user = (User) authentication.getPrincipal();
-			loginClientHanlder.createSaveLoginClient(user, request, response);
+	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+		Object principal = Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElse(null);
+		if (principal instanceof User) {
+			User user = (User) principal;
+			loginClientHanlder.createSaveLoginClient(user, request, response, authentication);
 		}
-		super.onLogoutSuccess(request, response, authentication);
 	}
 
 	@Component
@@ -47,11 +43,11 @@ public class LogoutHandler extends SimpleUrlLogoutSuccessHandler {
 		}
 
 		@Override
-		protected void fillLoginClient(User user, HttpServletRequest request, HttpServletResponse response, LoginClient client) {
-			if(user.getLoginClient()!=null) {
-				client.setSession(user.getLoginClient().getSession());
-			}
+		protected void fillLoginClient(User user, HttpServletRequest request, HttpServletResponse response,
+				LoginClient client, Authentication authentication) {
 		}
 
 	}
+
+
 }

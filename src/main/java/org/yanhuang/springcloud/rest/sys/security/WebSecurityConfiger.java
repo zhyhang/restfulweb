@@ -23,7 +23,7 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 	private FormLoginSuccessHandler loginSuccessHandlerForm;
 	
 	@Autowired
-	private LogoutHandler logoutSuccessHandler;
+	private LogoutHandler logoutHandler;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -37,7 +37,7 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		.loginPage("/login").permitAll()
 		.successHandler(loginSuccessHandlerForm)
 		.and().logout().permitAll()
-		.logoutSuccessHandler(logoutSuccessHandler)
+		.addLogoutHandler(logoutHandler)
 		.and().headers().frameOptions().disable() // (all frame nest) for h2-console
 		.and().csrf().disable(); // for h2-console
 		

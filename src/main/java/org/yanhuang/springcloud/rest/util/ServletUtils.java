@@ -4,6 +4,7 @@
 package org.yanhuang.springcloud.rest.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -96,6 +97,18 @@ public class ServletUtils {
 			return null;
 		}
 		return request.getHeader("Referer");
+	}
+	
+	public static String getCookie(HttpServletRequest request, String name) {
+		Optional<Cookie[]> cs = Optional.ofNullable(request).map(r -> r.getCookies());
+		if (cs.isPresent()) {
+			for (Cookie c : cs.get()) {
+				if (c != null && name != null && name.equals(c.getName())) {
+					return c.getValue();
+				}
+			}
+		}
+		return null;
 	}
 
 	public static void setCookie(String domain, String key, String value, int expiry, HttpServletResponse response) {
