@@ -23,7 +23,6 @@ public abstract class LoginSuccessHandler extends SavedRequestAwareAuthenticatio
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
-		request.getSession(true);//trigger session create for succeeding handle
 		User user = (User) authentication.getPrincipal();
 		LoginClient savedClient = getLoginClientHandler().createSaveLoginClient(user, request, response,
 				authentication);
