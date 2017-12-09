@@ -16,8 +16,9 @@ import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.yanhuang.springcloud.rest.entity.BaseEntity;
+import org.yanhuang.springcloud.rest.jpa.domain.DomainBaseEntity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author zhyhang
@@ -25,7 +26,7 @@ import org.yanhuang.springcloud.rest.entity.BaseEntity;
  */
 @Entity
 @Table(name = "security_user")
-public class User extends BaseEntity implements UserDetails {
+public class User extends DomainBaseEntity implements UserDetails {
 
 	private static final long serialVersionUID = 4355046442165677931L;
 
@@ -69,6 +70,7 @@ public class User extends BaseEntity implements UserDetails {
 	private boolean passExpired = false;
 	
 	@Transient
+	@JsonIgnore
 	private LoginClient loginClient;
 
 	@Override
@@ -178,7 +180,4 @@ public class User extends BaseEntity implements UserDetails {
 		this.loginClient = loginClient;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("88888888"));
-	}
 }

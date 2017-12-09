@@ -9,15 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.yanhuang.springcloud.rest.entity.BaseEntity;
-
 /**
  * @author zhyhang
  *
  */
 @Entity
 @Table(name = "person")
-public class Person extends BaseEntity{
+public class Person extends DomainBaseEntity{
 
 	private static final long serialVersionUID = 4513168467687604168L;
 	

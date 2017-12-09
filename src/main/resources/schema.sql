@@ -14,7 +14,9 @@ creation datetime not null default now(),
 last_modified datetime not null default now(),
 version int not null default 0,
 active bool default true,
-removed bool default false
+removed bool default false,
+creator_id int not null,
+last_modifier_id int not null
 ) charset=utf8;
 
 create table security_login_log(
@@ -58,7 +60,9 @@ creation datetime not null default now(),
 last_modified datetime not null default now(),
 version int not null default 0,
 active bool default true,
-removed bool default false
+removed bool default false,
+creator_id int not null,
+last_modifier_id int not null
 ) charset=utf8;
 
 create table employee(
@@ -69,7 +73,9 @@ creation datetime not null default now(),
 last_modified datetime not null  default now(),
 version int not null default 0,
 active bool default true,
-removed bool default false
+removed bool default false,
+creator_id int not null,
+last_modifier_id int not null
 ) charset=utf8;
 
 create table nation(
@@ -83,7 +89,9 @@ creation datetime not null default now(),
 last_modified datetime not null default now(),
 version int not null default 0,
 active bool default true,
-removed bool default false
+removed bool default false,
+creator_id int not null,
+last_modifier_id int not null
 ) charset=utf8;
 
 create table company(
@@ -97,6 +105,8 @@ creation datetime not null default now(),
 last_modified datetime not null default now(),
 version int not null default 0,
 active bool default true,
-removed bool default false
+removed bool default false,
+creator_id int not null,
+last_modifier_id int not null
 ) charset=utf8;
 

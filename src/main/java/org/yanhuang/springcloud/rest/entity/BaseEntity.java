@@ -55,8 +55,7 @@ public abstract class BaseEntity implements Serializable {
 	
 	@Column(name="removed")
 	private boolean removed = false;
-
-	// TODO creator
+	
 	// TODO abac property(e.g. parentid)
 	@Override
 	public int hashCode() {
