@@ -4,9 +4,15 @@ restful web example with spring cloud
 ## TODO
 - i18n
 - validation
-- relation between entity 1 and entity 2
-- login success or failure, write to log and db
-- loginClient enum supports
+- ~~relation between entity 1 and entity 2~~
+- ~~login success or failure, write to log and db~~
+- ~~loginClient enum supports~~
+
+## Notes
+- docker run without as root (i.e. sudo), when dockerRedis bean create error
+    - https://docs.docker.com/engine/installation/linux/linux-postinstall/
+- DockerTestContainer on Win10
+    - https://www.testcontainers.org/usage/windows_support.html
  
 ## Knowledge
 - [spring security audit event actuator](http://www.baeldung.com/spring-boot-authentication-audit/)
