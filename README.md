@@ -7,6 +7,7 @@ restful web example with spring cloud
 - ~~relation between entity 1 and entity 2~~
 - ~~login success or failure, write to log and db~~
 - ~~loginClient enum supports~~
+- session invalid (same as logout) persistent to db (include last access time)
 
 ## Notes
 - docker run without as root (i.e. sudo), when dockerRedis bean create error
