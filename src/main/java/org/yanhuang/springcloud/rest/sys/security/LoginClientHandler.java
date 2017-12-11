@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public abstract class LoginClientHandler {
 		client.setUserid(user.getId());
 		client.setUsername(user.getUsername());
 		client.setSession(ServletUtils.getHttpSessionId(request));
+		client.setLastAccess(Optional.ofNullable(ServletUtils.getHttpSession(request))
+				.map(HttpSession::getLastAccessedTime).map(DateTimeUtils::parseMillis).orElse(null));
 		client.setIpv4(ServletUtils.getIpAddr(request));
 		client.setActionType(actionType());
 		client.setUa(StringUtils.substring(Optional.ofNullable(ServletUtils.getUseragent(request)).orElse(""), 0, 512));

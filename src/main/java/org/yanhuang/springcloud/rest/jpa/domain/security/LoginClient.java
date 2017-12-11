@@ -27,7 +27,8 @@ public class LoginClient extends BaseEntity {
 		login_form,
 		login_oauth2,
 		login_openid,
-		logout;
+		logout,
+		session_expire;
 	}
 
 	@Column(name="userid")
@@ -96,6 +97,9 @@ public class LoginClient extends BaseEntity {
 	
 	@Column(name="longtitude")
 	private Double longitude;
+	
+	@Column(name="last_access")
+	private LocalDateTime lastAccess;
 	
 	public Long getUserid() {
 		return userid;
@@ -271,6 +275,14 @@ public class LoginClient extends BaseEntity {
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+
+	public LocalDateTime getLastAccess() {
+		return lastAccess;
+	}
+
+	public void setLastAccess(LocalDateTime lastAccess) {
+		this.lastAccess = lastAccess;
 	}
 
 }

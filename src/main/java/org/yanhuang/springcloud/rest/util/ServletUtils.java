@@ -84,6 +84,13 @@ public class ServletUtils {
 		}
 		return null;
 	}
+	
+	public static HttpSession getHttpSession(HttpServletRequest request) {
+		if (request == null) {
+			return null;
+		}
+		return request.getSession(false);
+	}
 
 	public static String getUseragent(HttpServletRequest request) {
 		if (request == null) {
