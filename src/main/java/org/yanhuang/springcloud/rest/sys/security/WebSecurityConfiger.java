@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.yanhuang.springcloud.rest.service.security.UserService;
 
 @Configuration
@@ -83,5 +84,13 @@ public class WebSecurityConfiger extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 	}
 
-
+	/**
+	 * register this bean to publish security session event to listeners
+	 * @return
+	 */
+	@Bean
+	public HttpSessionEventPublisher httpSessionEventPublisher() {
+		return new HttpSessionEventPublisher();
+	}
+	
 }
