@@ -7,7 +7,12 @@ restful web example with spring cloud
 - ~~relation between entity 1 and entity 2~~
 - ~~login success or failure, write to log and db~~
 - ~~loginClient enum supports~~
-- session invalid (same as logout) persistent to db (include last access time)
+- ~~session invalid (same as logout) persistent to db (include last access time)~~
+- service id support: system property, classpath service
+- issue: spring session concurrency
+    - when login on browse A, logout browse B, shutdown service, restart, browse B login, browse A also login state, even though max session 1.
+    - session store in redis
+
 
 ## Notes
 - docker run without as root (i.e. sudo), when dockerRedis bean create error
@@ -23,9 +28,6 @@ restful web example with spring cloud
     * org.springframework.security.access.event.LoggerListener.LoggerListener
 - markdown grammar https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet    
   
-
-	
-- todo
 
 
 
