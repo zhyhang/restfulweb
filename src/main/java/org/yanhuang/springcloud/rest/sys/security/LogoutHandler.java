@@ -30,7 +30,12 @@ public class LogoutHandler implements org.springframework.security.web.authentic
 		Object principal = Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElse(null);
 		if (principal instanceof User) {
 			User user = (User) principal;
-			loginClientHanlder.createSaveLoginClient(user, request, response, authentication);
+			if (user.getLoginClient() == null || !user.getLoginClient().isLogoutPersisted()) {
+				LoginClient savedClient = loginClientHanlder.createSaveLoginClient(user, request, response,
+						authentication);
+				savedClient.setLogoutPersisted(true);
+				user.setLoginClient(savedClient);
+			}
 		}
 	}
 
@@ -48,6 +53,5 @@ public class LogoutHandler implements org.springframework.security.web.authentic
 		}
 
 	}
-
 
 }

@@ -75,21 +75,14 @@ public class ServletUtils {
 	}
 
 	public static String getHttpSessionId(HttpServletRequest request) {
-		if (request == null) {
-			return null;
-		}
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			return session.getId();
-		}
-		return null;
+		return getHttpSession(request).map(s -> s.getId()).orElse(null);
 	}
-	
-	public static HttpSession getHttpSession(HttpServletRequest request) {
+
+	public static Optional<HttpSession> getHttpSession(HttpServletRequest request) {
 		if (request == null) {
 			return null;
 		}
-		return request.getSession(false);
+		return Optional.ofNullable(request.getSession(false));
 	}
 
 	public static String getUseragent(HttpServletRequest request) {
@@ -105,7 +98,7 @@ public class ServletUtils {
 		}
 		return request.getHeader("Referer");
 	}
-	
+
 	public static String getCookie(HttpServletRequest request, String name) {
 		Optional<Cookie[]> cs = Optional.ofNullable(request).map(r -> r.getCookies());
 		if (cs.isPresent()) {
@@ -167,14 +160,14 @@ public class ServletUtils {
 		}
 		return orig;
 	}
-	
+
 	public static String createIfAbsentCookie(HttpServletRequest request, HttpServletResponse response) {
-		String cookie=getCookieDefault(request);
-		if(StringUtils.isBlank(cookie)) {
-			cookie=generateCookie();
+		String cookie = getCookieDefault(request);
+		if (StringUtils.isBlank(cookie)) {
+			cookie = generateCookie();
 		}
 		setCookieDefault(response, cookie);
 		return cookie;
 	}
-	
+
 }

@@ -34,8 +34,8 @@ public abstract class LoginClientHandler {
 		client.setUserid(user.getId());
 		client.setUsername(user.getUsername());
 		client.setSession(ServletUtils.getHttpSessionId(request));
-		client.setLastAccess(Optional.ofNullable(ServletUtils.getHttpSession(request))
-				.map(HttpSession::getLastAccessedTime).map(DateTimeUtils::parseMillis).orElse(null));
+		client.setLastAccess(ServletUtils.getHttpSession(request).map(HttpSession::getLastAccessedTime)
+				.map(DateTimeUtils::parseMillis).orElse(null));
 		client.setIpv4(ServletUtils.getIpAddr(request));
 		client.setActionType(actionType());
 		client.setUa(StringUtils.substring(Optional.ofNullable(ServletUtils.getUseragent(request)).orElse(""), 0, 512));

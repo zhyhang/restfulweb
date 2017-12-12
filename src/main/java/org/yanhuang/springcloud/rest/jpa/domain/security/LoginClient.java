@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.yanhuang.springcloud.rest.entity.BaseEntity;
 
@@ -101,6 +102,17 @@ public class LoginClient extends BaseEntity {
 	@Column(name="last_access")
 	private LocalDateTime lastAccess;
 	
+	/**
+	 * whether or not logout has persisted to store 
+	 */
+	@Transient
+	private boolean logoutPersisted;
+	
+	@Override
+	public LoginClient clone() throws CloneNotSupportedException {
+		return (LoginClient)super.clone();
+	}
+
 	public Long getUserid() {
 		return userid;
 	}
@@ -283,6 +295,14 @@ public class LoginClient extends BaseEntity {
 
 	public void setLastAccess(LocalDateTime lastAccess) {
 		this.lastAccess = lastAccess;
+	}
+
+	public boolean isLogoutPersisted() {
+		return logoutPersisted;
+	}
+
+	public void setLogoutPersisted(boolean logoutPersisted) {
+		this.logoutPersisted = logoutPersisted;
 	}
 
 }

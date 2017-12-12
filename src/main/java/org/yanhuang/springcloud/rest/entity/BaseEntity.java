@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @MappedSuperclass
 @EntityListeners({ AuditingEntityListener.class })
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable,Cloneable {
 
 	private static final long serialVersionUID = 4865664298299542863L;
 
