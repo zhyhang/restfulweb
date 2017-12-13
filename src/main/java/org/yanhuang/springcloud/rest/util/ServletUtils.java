@@ -147,7 +147,7 @@ public class ServletUtils {
 	public static String generateCookie() {
 		String millis = alignTo(Integer.toHexString((int) System.currentTimeMillis()), 8);
 		String counters = alignTo(Integer.toHexString(cookieCounter.incrementAndGet()), 8);
-		return startSign + millis + counters;
+		return ServiceIds.id()+startSign + millis + counters;
 	}
 
 	private static String alignTo(String orig, int len) {

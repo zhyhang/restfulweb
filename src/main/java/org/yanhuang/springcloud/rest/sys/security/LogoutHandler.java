@@ -29,9 +29,7 @@ public class LogoutHandler implements org.springframework.security.web.authentic
 	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		Object principal = Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElse(null);
 		if (principal instanceof User) {
-			User user = (User) principal;
-			LoginClient savedClient = loginClientHanlder.createSaveLoginClient(user, request, response, authentication);
-			user.setLoginClient(savedClient);
+			loginClientHanlder.createSaveLoginClient((User) principal, request, response, authentication);
 		}
 	}
 

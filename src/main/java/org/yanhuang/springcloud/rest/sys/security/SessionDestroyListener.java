@@ -35,17 +35,17 @@ public class SessionDestroyListener {
 			User u = (User) Optional.ofNullable(c).map(sc -> sc.getAuthentication()).map(a -> a.getPrincipal())
 					.orElse(null);
 			LoginClient client = null;
-			if (u != null && (client = u.getLoginClient()) != null) {
+			if (u != null && u.getLoginClientId() != null
+					&& (client = loginClientRepo.findById(u.getLoginClientId()).orElse(null)) != null) {
 				try {
-					LoginClient cloneClient = client.clone();
-					cloneClient.setVersion(-1);
-					cloneClient.setId(null);
-					cloneClient.setActionTime(DateTimeUtils.parseMillis(System.currentTimeMillis()));
-					cloneClient.setActionType(loginType.session_expire);
-					cloneClient.setSession(event.getId());
-					cloneClient.setLastAccess(
+					client.setVersion(-1);
+					client.setId(null);
+					client.setActionTime(DateTimeUtils.parseMillis(System.currentTimeMillis()));
+					client.setActionType(loginType.session_expire);
+					client.setSession(event.getId());
+					client.setLastAccess(
 							DateTimeUtils.parseMillis(((HttpSession) event.getSource()).getLastAccessedTime()));
-					loginClientRepo.save(cloneClient);
+					loginClientRepo.save(client);
 				} catch (Exception e) {
 					LoggerFactory.getLogger(this.getClass()).error("session-destroy-error", e);
 				}

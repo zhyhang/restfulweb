@@ -26,7 +26,7 @@ public abstract class LoginSuccessHandler extends SavedRequestAwareAuthenticatio
 		User user = (User) authentication.getPrincipal();
 		LoginClient savedClient = getLoginClientHandler().createSaveLoginClient(user, request, response,
 				authentication);
-		user.setLoginClient(savedClient);
+		user.setLoginClientId(savedClient.getId());
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 

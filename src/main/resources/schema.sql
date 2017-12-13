@@ -51,6 +51,7 @@ active bool default true,
 removed bool default false
 ) charset=utf8;
 
+create index idx_session_id on security_login_log(session);
 
 -- test
 create table person(

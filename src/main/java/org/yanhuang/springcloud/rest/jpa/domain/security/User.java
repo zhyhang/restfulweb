@@ -18,8 +18,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.yanhuang.springcloud.rest.jpa.domain.DomainBaseEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * @author zhyhang
  *
@@ -69,9 +67,11 @@ public class User extends DomainBaseEntity implements UserDetails {
 	@Column(name = "pass_expired")
 	private boolean passExpired = false;
 	
+	/**
+	 * LoginClient info ID, only hold id for saving memory
+	 */
 	@Transient
-	@JsonIgnore
-	private LoginClient loginClient;
+	private Long loginClientId;
 
 	@Override
 	public String getUsername() {
@@ -172,12 +172,12 @@ public class User extends DomainBaseEntity implements UserDetails {
 		this.passExpired = passExpired;
 	}
 
-	public LoginClient getLoginClient() {
-		return loginClient;
+	public Long getLoginClientId() {
+		return loginClientId;
 	}
 
-	public void setLoginClient(LoginClient loginClient) {
-		this.loginClient = loginClient;
+	public void setLoginClientId(Long loginClientId) {
+		this.loginClientId = loginClientId;
 	}
 
 }
