@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.yanhuang.springcloud.rest.jpa.domain.security.LoginClient;
 import org.yanhuang.springcloud.rest.jpa.domain.security.LoginClient.loginType;
-import org.yanhuang.springcloud.rest.jpa.domain.security.User;
 
 /**
  * @author zhyhang
@@ -36,7 +35,7 @@ public class FormLoginSuccessHandler extends LoginSuccessHandler {
 		}
 
 		@Override
-		protected void fillLoginClient(User user, HttpServletRequest request, HttpServletResponse response,
+		protected void fillLoginClient(Account account, HttpServletRequest request, HttpServletResponse response,
 				LoginClient client, Authentication authentication) {
 		}
 

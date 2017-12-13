@@ -39,7 +39,7 @@ public class ServiceIds {
 	}
 
 	/**
-	 * this service instance id
+	 * this service instance id, i.e. service running instance identifier
 	 * 
 	 * @return
 	 */

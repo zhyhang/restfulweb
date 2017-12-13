@@ -101,6 +101,12 @@ public class LoginClient extends BaseEntity {
 	@Column(name="last_access")
 	private LocalDateTime lastAccess;
 	
+	@Column(name="session_timeout_sec")
+	private int sessionTimeoutSec;
+	
+	@Column(name="service_id")
+	private String serviceId;
+	
 	@Override
 	public LoginClient clone() throws CloneNotSupportedException {
 		return (LoginClient)super.clone();
@@ -288,6 +294,22 @@ public class LoginClient extends BaseEntity {
 
 	public void setLastAccess(LocalDateTime lastAccess) {
 		this.lastAccess = lastAccess;
+	}
+
+	public int getSessionTimeoutSec() {
+		return sessionTimeoutSec;
+	}
+
+	public void setSessionTimeoutSec(int sessionTimeoutSec) {
+		this.sessionTimeoutSec = sessionTimeoutSec;
+	}
+
+	public String getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
 	}
 
 }
