@@ -52,7 +52,6 @@ public class SessionDestroyListener {
 					LoggerFactory.getLogger(this.getClass()).error("session-destroy-error", e);
 				}
 			}
-			LoggerFactory.getLogger(this.getClass()).error("session-destroy: id[{}]", event.getId());
 		});
 	}
 
