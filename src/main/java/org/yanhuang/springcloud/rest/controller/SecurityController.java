@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.yanhuang.springcloud.rest.jpa.domain.security.User;
+import org.yanhuang.springcloud.rest.service.security.RolePrivilegeService;
 import org.yanhuang.springcloud.rest.service.security.UserService;
 import org.yanhuang.springcloud.rest.util.SecurityUtils;
 
@@ -30,6 +31,9 @@ public class SecurityController {
 
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private RolePrivilegeService rolePrivService;
 
 	@GetMapping(value = { "/login", "/login/;JSESSIONID={sessionId}" })
 	public String loginView() {

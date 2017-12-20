@@ -55,6 +55,31 @@ removed bool default false
 
 create index idx_session_id on security_login_log(session);
 
+create table security_role{
+	id int auto_increment primary key,
+	name varchar(128),
+	code varchar(64),
+	descript varchar(128),
+	creation datetime not null default now(),
+	last_modified datetime not null default now(),
+	version int not null default 0,
+	active bool default true,
+	removed bool default false
+) charset=utf8;
+
+create table security_privilege{
+	id int auto_increment primary key,
+	name varchar(128),
+	code varchar(64),
+	descript varchar(128),
+	type varchar(16),
+	creation datetime not null default now(),
+	last_modified datetime not null default now(),
+	version int not null default 0,
+	active bool default true,
+	removed bool default false
+) charset=utf8;
+
 -- test
 create table person(
 id int auto_increment primary key,

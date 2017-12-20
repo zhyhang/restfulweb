@@ -34,8 +34,8 @@ public class Privilege extends BaseEntity{
 	@Column(name="code")
 	private String code;
 	
-	@Column(name="desc")
-	private String desc;
+	@Column(name="descript")
+	private String descript;
 	
 	@Column(name="type")
 	private privilegeType type;
@@ -43,4 +43,45 @@ public class Privilege extends BaseEntity{
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY,mappedBy="privileges")
 	@JsonIgnore
 	private Set<Role> roles;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getDescript() {
+		return descript;
+	}
+
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+
+	public privilegeType getType() {
+		return type;
+	}
+
+	public void setType(privilegeType type) {
+		this.type = type;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
 }
