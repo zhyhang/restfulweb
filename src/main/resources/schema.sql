@@ -55,7 +55,7 @@ removed bool default false
 
 create index idx_session_id on security_login_log(session);
 
-create table security_role{
+create table security_role(
 	id int auto_increment primary key,
 	name varchar(128),
 	code varchar(64),
@@ -67,7 +67,7 @@ create table security_role{
 	removed bool default false
 ) charset=utf8;
 
-create table security_privilege{
+create table security_privilege(
 	id int auto_increment primary key,
 	name varchar(128),
 	code varchar(64),
