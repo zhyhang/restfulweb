@@ -57,5 +57,11 @@ public class SecurityController {
 	public User find(@PathVariable Long id) {
 		return service.find(id).orElse(null);
 	}
+	
+	@GetMapping("/dotest")
+	public String doTest() {
+		rolePrivService.saveRoleTest();
+		return "home.html";
+	}
 
 }

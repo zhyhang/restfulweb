@@ -80,6 +80,17 @@ create table security_privilege(
 	removed bool default false
 ) charset=utf8;
 
+create table security_role_privilege(
+	id int auto_increment primary key,
+	role_id int not null,
+	privilege_id int not null,
+	creation datetime not null default now(),
+	last_modified datetime not null default now(),
+	version int not null default 0,
+	active bool default true,
+	removed bool default false
+) charset=utf8;
+
 -- test
 create table person(
 id int auto_increment primary key,

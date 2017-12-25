@@ -5,7 +5,6 @@ package org.yanhuang.springcloud.rest.jpa.domain.security;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,7 +36,7 @@ public class Role extends BaseEntity{
 	@Column(name="descript")
 	private String descript;
 	
-	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "security_role_privilege", inverseJoinColumns = @JoinColumn(name = "privilege_id"), joinColumns = @JoinColumn(name = "role_id"))
 	@JsonIgnore
 	private Set<Privilege> privileges;
@@ -73,7 +72,5 @@ public class Role extends BaseEntity{
 	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
 	}
-	
-	
 	
 }

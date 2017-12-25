@@ -2,7 +2,6 @@ package org.yanhuang.springcloud.rest.jpa.domain.security;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +39,7 @@ public class Privilege extends BaseEntity{
 	@Column(name="type")
 	private privilegeType type;
 	
-	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY,mappedBy="privileges")
+	@ManyToMany(fetch = FetchType.LAZY,mappedBy="privileges")
 	@JsonIgnore
 	private Set<Role> roles;
 

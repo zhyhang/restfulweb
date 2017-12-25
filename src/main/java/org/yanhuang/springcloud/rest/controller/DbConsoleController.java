@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,7 @@ public class DbConsoleController {
 	private DbConsoleService service;
 
 	@GetMapping("/allperson")
-	public List<Map<String, Object>> queryAllPerson(@AuthenticationPrincipal User user) {
+	public List<Map<String, Object>> queryAllPerson(@AuthenticationPrincipal User user,HttpServletRequest request) {
 		logger.info("spring-security-user: {}",JsonUtils.toJson(user));
 		List<Map<String, Object>> allPerson = service.queryAllPerson();
 		return allPerson;
